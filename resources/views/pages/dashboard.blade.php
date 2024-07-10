@@ -1,15 +1,17 @@
 @extends('app')
 
 @section('page')
+
+<div class=" w-1/2">
     <div>
-        Dashboard
-
+        @include('components/post-form')
         @foreach ($posts as $post)
-         <div>
-            @include('components/post' , ['post' => $post])
-        </div>      
-        
-        @endforeach
-
+           @include('components/post' , ['post' => $post])
+       @endforeach
     </div>
+    
+</div>
+       
+
+    
 @endsection

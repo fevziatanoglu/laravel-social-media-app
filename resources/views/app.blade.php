@@ -7,8 +7,14 @@
     @vite('resources/css/app.css')
     <title>Laravel Social Media</title>
 </head>
-<body>
-   
-    @yield('page')
+<body class="bg-black container px-20">
+    <main class="relative flex flex-row ">
+        @include('components/navbar')
+        @yield('page')
+        @include('components/rightcomponent')
+    </main>
+     
+    
+
 </body>
 </html>
