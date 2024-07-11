@@ -16,9 +16,9 @@ class DashboardController extends Controller
         // ]);
 
         // $post->save();
-        
+
         // dump(Post::all());
-        
-        return view('pages/dashboard', ['posts' => Post::all()]);
+
+        return view('pages/dashboard', ['posts' => Post::orderBy('created_at' , 'DESC')->paginate('5')]);
     }
 }
