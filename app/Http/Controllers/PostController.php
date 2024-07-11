@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
+    function index($post_id){
+
+        $post = Post::find($post_id);
+
+        return view('pages/post' , ['post'=>$post]);
+    }
+
     function store()
     {
         request()->validate([

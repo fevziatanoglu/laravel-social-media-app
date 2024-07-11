@@ -1,4 +1,4 @@
-<div class="flex flex-row  px-10 py-3 gap-5 text-white border-[1px] border-b-0 border-gray-600   ">
+<div class="flex flex-row  px-10 py-3 gap-5 text-white border-[1px]  border-gray-600   ">
     {{-- user avatar --}}
     <div class="grow-0  min-h-10 max-h-10 min-w-10   bg-yellow-500 rounded-full "></div>
 
@@ -29,6 +29,8 @@
         @method('DELETE')
     <button class="self-start bg-red-500 p-2">x {{$post->id}}</button>
     </form>
+
+    <a href={{route('get-post' , $post->id)}} class="bg-yellow-500">get!!!</a>
 
 
 
