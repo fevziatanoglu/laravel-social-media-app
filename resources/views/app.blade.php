@@ -9,9 +9,9 @@
 </head>
 <body class="bg-black container px-20">
     <main class="relative flex flex-row ">
-        @include('components/navbar')
+        @include('components/left-sidebar')
         @yield('page')
-        @include('components/rightcomponent')
+        @include('components/right-sidebar')
     </main>
      
     

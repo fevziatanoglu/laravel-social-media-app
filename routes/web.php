@@ -20,7 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('post/{post_id}', [PostController::class, 'index'])->name('get-post');
+Route::get('post/{post}', [PostController::class, 'index'])->name('get-post');
 Route::post('post', [PostController::class, 'store'])->name('create-post');
-Route::delete('post/{post_id}', [PostController::class, 'delete'])->name('delete-post');
+Route::delete('post/{post}', [PostController::class, 'delete'])->name('delete-post');
+Route::get('post/edit/{post}', [PostController::class, 'edit'])->name('edit-post');
+Route::put('post/update/{post_id}', [PostController::class, 'update'])->name('update-post');
+
+
 

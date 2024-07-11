@@ -8,11 +8,9 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    function index($post_id){
-
-        $post = Post::find($post_id);
-
-        return view('pages/post' , ['post'=>$post]);
+    function index(Post $post)
+    {
+        return view('pages/post', compact('post'));
     }
 
     function store()
@@ -26,11 +24,30 @@ class PostController extends Controller
     }
 
 
-    function delete(Post $post_id){
-
-
-        $post_id->delete();
+    function delete(Post $post)
+    {
+        $post->delete();
         return redirect()->route('dashboard')->with('success', 'Post deleted successfully.');
+    }
 
+    function edit(Post $post)
+    {
+
+        $isEdit = true;
+        return view('pages/post', compact('post', 'isEdit'));
+    }
+
+
+    function update($post_id)
+    {
+
+        request()->validate([
+            'edit-content' => 'required|min:5|max:240'
+        ]);
+        $post = Post::find($post_id);
+        $post->content = request()->get('edit-content');
+        $post->save();
+
+        return view('pages/post', compact('post'));
     }
 }
