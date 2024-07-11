@@ -21,3 +21,5 @@ Route::get('/', function () {
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::post('post', [PostController::class, 'store'])->name('create-post');
+Route::delete('post/{post_id}', [PostController::class, 'delete'])->name('delete-post');
+

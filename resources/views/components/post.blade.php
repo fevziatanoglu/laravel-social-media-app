@@ -23,6 +23,13 @@
         </div>
     </div>
 
+    {{-- delete form --}}
+    <form action={{route('delete-post',$post->id)}} method="POST">
+        @csrf
+        @method('DELETE')
+    <button class="self-start bg-red-500 p-2">x {{$post->id}}</button>
+    </form>
+
 
 
 
