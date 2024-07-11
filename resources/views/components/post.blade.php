@@ -65,8 +65,6 @@
     @endif
 
 
+    @include('components/comments-box')
 
-
-
-    {{-- {{$post->content}} --}}
 </div>
