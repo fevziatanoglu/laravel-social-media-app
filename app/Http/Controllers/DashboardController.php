@@ -17,7 +17,13 @@ class DashboardController extends Controller
 
         // $post->save();
 
-        // dump(Post::all());
+        // dump(Post::all());   
+
+        if(request()->get('search-query')){
+            $posts = Post::where('content', 'LIKE', '%'.request()->get('search-query').'%')->paginate('5');
+            return view('pages/dashboard', ['posts' => $posts] );
+        }
+
 
         return view('pages/dashboard', ['posts' => Post::orderBy('created_at' , 'DESC')->paginate('5')]);
     }
