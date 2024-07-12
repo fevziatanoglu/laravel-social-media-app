@@ -4,10 +4,10 @@
 
 <div class=" w-1/2">
     <div>
-        @include('components/flash-message')
-        @include('components/post-form')
+        @include('components/items/flash-message-item')
+        @include('components/forms/post-form')
         @foreach ($posts as $post)
-           @include('components/post')
+           @include('components/items/post')
        @endforeach
        <div class="bg-white flex flex-row">
        {{-- {{ $posts->links()}} --}}

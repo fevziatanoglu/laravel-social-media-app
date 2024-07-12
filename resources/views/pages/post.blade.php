@@ -6,6 +6,6 @@
             <a href={{ route('dashboard') }}>{{ '<--' }} </a>
             <h1 class="text-2xl font-bold  ">Post</h1>
         </div>
-        @include('components/post')
+        @include('components/items/post')
     </div>
 @endsection

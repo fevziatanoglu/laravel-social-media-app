@@ -25,7 +25,7 @@ Route::get('posts/{post}', [PostController::class, 'index'])->name('get-post');
 Route::post('posts', [PostController::class, 'store'])->name('create-post');
 Route::delete('posts/{post}', [PostController::class, 'delete'])->name('delete-post');
 Route::get('posts/edit/{post}', [PostController::class, 'edit'])->name('edit-post');
-Route::put('posts/update/{post_id}', [PostController::class, 'update'])->name('update-post');
+Route::put('posts/update/{post}', [PostController::class, 'update'])->name('update-post');
 
 Route::post('posts/{post}/comments' , [CommentController::class , 'store'])->name('create-comment');
 

@@ -15,11 +15,11 @@ class PostController extends Controller
 
     function store()
     {
-        request()->validate([
-            'post-content' => 'required|min:5|max:240'
+        $validatedRequest = request()->validate([
+            'content' => 'required|min:5|max:240'
         ]);
-        $post =  Post::create(['content' => request()->get('post-content')]);
 
+        $post =  Post::create($validatedRequest);
         return redirect()->route('dashboard')->with('success', 'Post created successfully.');
     }
 
@@ -32,21 +32,17 @@ class PostController extends Controller
 
     function edit(Post $post)
     {
-
         $isEdit = true;
         return view('pages/post', compact('post', 'isEdit'));
     }
 
 
-    function update($post_id)
+    function update(Post $post)
     {
 
-        request()->validate([
-            'edit-content' => 'required|min:5|max:240'
-        ]);
-        $post = Post::find($post_id);
-        $post->content = request()->get('edit-content');
-        $post->save();
+        $validatedRequest = request()->validate(['content' => 'required|min:5|max:240']);
+
+        $post = Post::updateOrCreate($validatedRequest);
 
         return view('pages/post', compact('post'));
     }

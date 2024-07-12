@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            // constrained() ensure it exists in the post
+            // casecadeOnDelete() will delete related comments when a post is deleted
             $table->foreignId('post_id')->constrained()->casecadeOnDelete();
             $table->string('content');
             $table->timestamps();

@@ -21,11 +21,11 @@
                 @method('PUT')
                 <div class="flex flex-row  gap-2 w-full">
 
-                    <textarea name="edit-content" id="edit-content" rows="4" type="text"
+                    <textarea name="content" id="content" rows="4" type="text"
                         class="bg-black border-[1px] border-white rounded-md px-2 text-base overflow-hidden w-full resize-none" placeholder="Edit your post">{{$post->content}}</textarea>
 
                 </div>
-                @error('post-content')
+                @error('content')
                     <span class="text-red-400">{{ $message }}</span>
                 @enderror
                 <div class="w-full flex flex-row justify-end">
