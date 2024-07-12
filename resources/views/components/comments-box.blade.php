@@ -1,4 +1,6 @@
 
 @include('components/forms/comment-form')
+@foreach ($post->comments as $comment)
 
-{{-- comments will be here --}}
+@include('components/items/comment-item')
+@endforeach

@@ -19,7 +19,10 @@ class PostController extends Controller
             'content' => 'required|min:5|max:240'
         ]);
 
+        $validatedRequest['user_id'] = auth()->id();
+        // dd($validatedRequest);
         $post =  Post::create($validatedRequest);
+        
         return redirect()->route('dashboard')->with('success', 'Post created successfully.');
     }
 

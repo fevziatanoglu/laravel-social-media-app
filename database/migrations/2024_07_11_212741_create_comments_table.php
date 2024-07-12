@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             // constrained() ensure it exists in the post
             // casecadeOnDelete() will delete related comments when a post is deleted
+            $table->foreignId('user_id')->constrained()->casecadeOnDelete();
             $table->foreignId('post_id')->constrained()->casecadeOnDelete();
             $table->string('content');
             $table->timestamps();

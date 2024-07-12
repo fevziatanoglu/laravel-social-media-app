@@ -13,8 +13,6 @@
         <button type="submit" class="bg-blue-500 px-5 py-2 rounded-3xl">Comment</button>
     </div>
 
-    @foreach ($post->comments as $comment)
-        <div>{{$comment->content}}</div>
-    @endforeach
+
 
 </form>

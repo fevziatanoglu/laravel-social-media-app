@@ -7,9 +7,9 @@
     <div class="flex flex-col w-full">
         <div class="flex flex-row gap-1">
             {{-- username --}}
-            <a href="" class="hover:underline font-bold  ">Name</a>
+            <a href="" class="hover:underline font-bold  ">{{$post->user->name}}</a>
             {{-- postdate --}}
-            <p class="opacity-50 font-semibold">· Date</p>
+            <p class="opacity-50 font-semibold">· {{ $post->created_at->diffForHumans()}}</p>
         </div>
 
         {{-- content --}}
