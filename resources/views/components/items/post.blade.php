@@ -1,28 +1,30 @@
-
-<div class="flex flex-row  px-10 py-3 gap-5 text-white border-[1px]  border-gray-600   ">
+<div class="flex flex-row  px-5 py-3 gap-5 text-white border-[1px]  border-gray-600   ">
 
     {{-- user avatar --}}
-    <div class="grow-0  min-h-10 max-h-10 min-w-10   bg-yellow-500 rounded-full "></div>
-
+    <img class="flex grow-0  min-h-10 max-h-10 min-w-10 bg-yellow-500 rounded-full " {{-- src="https://api.dicebear.com/9.x/adventurer/svg?seed=oreo{{$post->user->name}}" --}}
+        {{-- alt="user-avatar" --}}>
     <div class="flex flex-col w-full">
         <div class="flex flex-row gap-1">
             {{-- username --}}
-            <a href="" class="hover:underline font-bold  ">{{$post->user->name}}</a>
+            <form action=""></form>
+            <a href={{ route('get-user', $post->user->id) }}
+                class="hover:underline font-bold  ">{{ $post->user->name }}</a>
             {{-- postdate --}}
-            <p class="opacity-50 font-semibold">· {{ $post->created_at->diffForHumans()}}</p>
+            <p class="opacity-50 font-semibold">· {{ $post->created_at->diffForHumans() }}</p>
         </div>
 
         {{-- content --}}
         @if ($isEdit ?? false)
             {{-- update form --}}
-            <form action={{ route('update-post' , $post->id) }} method="POST"
+            <form action={{ route('update-post', $post->id) }} method="POST"
                 class="flex flex-col p-5 gap-5  text-white  ">
                 @csrf
                 @method('PUT')
                 <div class="flex flex-row  gap-2 w-full">
 
                     <textarea name="content" id="content" rows="4" type="text"
-                        class="bg-black border-[1px] border-white rounded-md px-2 text-base overflow-hidden w-full resize-none" placeholder="Edit your post">{{$post->content}}</textarea>
+                        class="bg-black border-[1px] border-white rounded-md px-2 text-base overflow-hidden w-full resize-none"
+                        placeholder="Edit your post">{{ $post->content }}</textarea>
 
                 </div>
                 @error('content')
@@ -49,20 +51,25 @@
         </div>
     </div>
 
-    {{-- delete form --}}
-    <form action={{ route('delete-post', $post->id) }} method="POST">
-        @csrf
-        @method('DELETE')
-        <button class="self-start bg-red-500 p-2">x {{ $post->id }}</button>
-    </form>
+    @if (auth()->id() == $post->user->id)
+        {{-- delete form --}}
+        <form action={{ route('delete-post', $post->id) }} method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="self-start bg-red-500 p-2">x {{ $post->id }}</button>
+        </form>
+
+        {{-- edit buttons --}}
+        @if ($isEdit ?? false)
+            <a href={{ route('get-post', $post->id) }} class="bg-yellow-500">Cancel Edit</a>
+        @else
+            <a href={{ route('edit-post', $post->id) }} class="bg-yellow-500">Edit</a>
+        @endif
+    @endif
+
     {{-- get post button --}}
     <a href={{ route('get-post', $post->id) }} class="bg-yellow-500">View</a>
-    {{-- edit buttons --}}
-    @if ($isEdit ?? false)
-        <a href={{ route('get-post', $post->id) }} class="bg-yellow-500">Cancel Edit</a>
-    @else
-        <a href={{ route('edit-post', $post->id) }} class="bg-yellow-500">Edit</a>
-    @endif
+
 
 
     @include('components/comments-box')
