@@ -9,11 +9,20 @@
     <title>Laravel Social Media</title>
 </head>
 
-<body class="bg-black container ">
-    <main class="relative flex flex-row ">
-        @include('components/left-sidebar')
-        @yield('page')
-        @include('components/right-sidebar')
+<body class="bg-black container  text-white overflow-x-hidden">
+    <main class="  flex flex-row justify-center  m-0 w-screen  gap-4 px-24 ">
+        {{-- left --}}
+        <div class="w-1/5   py-3">
+            @include('components/left-sidebar')
+        </div>
+        {{-- page --}}
+        <div class=" w-3/5 border-[1px]  border-gray-600 ">
+            @yield('page')
+        </div>
+        {{-- right --}}
+        <div class=" w-1/5 py-3">
+            @include('components/right-sidebar')
+        </div>
     </main>
 
 

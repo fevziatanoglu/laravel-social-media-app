@@ -1,20 +1,21 @@
-<form action={{ route('post.store') }} method="POST" 
-    class="flex flex-col  px-10 py-3 text-white border-[1px] border-b-0 border-gray-600 gap-2 " >
+<form action={{ route('post.store') }} method="POST"
+    class="flex flex-row  px-10 py-3 text-white border-b-[1px] border-gray-600 gap-2 items-center">
     @csrf
     @method('post')
-    {{-- user avatar --}}
     <div class="flex flex-row  gap-2 w-full">
-        <div class="grow-0  min-h-10 max-h-10 min-w-10   bg-red-500 rounded-full "></div>
+        {{-- user avatar --}}
+        <img class="flex grow-0  min-h-10 max-h-10 min-w-10 max-w-10 bg-yellow-500 rounded-full "
+            src="https://api.dicebear.com/9.x/adventurer/svg?seed={{ Auth::user()->name}}" alt="user-avatar">
 
         <textarea name="content" id="content" rows="3" type="text"
-            class="bg-black border-0  px-2 text-base overflow-hidden w-full resize-none" placeholder="Enter your post"></textarea>
+            class="bg-black border-0  p-2 text-base overflow-hidden w-full resize-none" placeholder="Enter your post"></textarea>
 
     </div>
     @error('content')
-        <span class="text-red-400" >{{$message}}</span>
+        <span class="text-red-400">{{ $message }}</span>
     @enderror
-    <div class="w-full flex flex-row justify-end">
-        <button type="submit" class="bg-blue-500 px-5 py-2 rounded-3xl">Share</button>
-    </div>
+
+    <button type="submit" class="bg-blue-500 px-8 py-3 rounded-3xl">Share</button>
+
 
 </form>

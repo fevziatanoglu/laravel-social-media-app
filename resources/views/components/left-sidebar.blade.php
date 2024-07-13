@@ -1,18 +1,16 @@
-<nav class="sticky left-0 top-0 h-screen w-2/5 flex  flex-col justify-start  items-center pt-10 gap-10   text-white  ">
+<nav class="sticky left-0 top-0 text-center text-2xl flex  flex-col justify-start  items-center  gap-7">
 
-    <a href="/" class="text-5xl font-extrabold ">Laravel Social</a>
+    <a href="/" class="text-4xl font-extrabold ">LaraSoc</a>
 
-    <div class="text-3xl flex  flex-col justify-start  items-center  gap-3">
-        <a href="/">Home</a>
-        <a href="/">Search</a>
-        @auth
-        <a href={{ route("get-user" , ['user' => auth()->id() ?? '']) }}>Profile</a>
-        @include('components/forms/logout-form')
-        @endauth
-        @guest
-        <a href={{ route('login')}}>Login</a>
-        @endguest
+    <a href="/">Home</a>
+    <a href="/">Search</a>
+    @auth
+        <a href={{ route('get-user', ['user' => auth()->id() ?? '']) }}>Profile</a>
         <a href="/">Post</a>
+        @include('components/forms/logout-form')
+    @endauth
+    @guest
+        <a href={{ route('login') }}>Login</a>
+    @endguest
 
-    </div>
 </nav>

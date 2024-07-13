@@ -1,77 +1,88 @@
-<div class="flex flex-row  px-5 py-3 gap-5 text-white border-[1px]  border-gray-600   ">
+<div class="flex flex-row  p-5 gap-5  text-white border-[1px]  border-gray-600 ">
+
+
+
+
+
 
     {{-- user avatar --}}
-    <img class="flex grow-0  min-h-10 max-h-10 min-w-10 bg-yellow-500 rounded-full " {{-- src="https://api.dicebear.com/9.x/adventurer/svg?seed=oreo{{$post->user->name}}" --}}
-        {{-- alt="user-avatar" --}}>
-    <div class="flex flex-col w-full">
-        <div class="flex flex-row gap-1">
-            {{-- username --}}
-            <form action=""></form>
-            <a href={{ route('get-user', $post->user->id) }}
-                class="hover:underline font-bold  ">{{ $post->user->name }}</a>
-            {{-- postdate --}}
-            <p class="opacity-50 font-semibold">· {{ $post->created_at->diffForHumans() }}</p>
+    <img class="flex grow-0  min-h-10 max-h-10 min-w-10 max-w-10 bg-yellow-500 rounded-full "
+        src="https://api.dicebear.com/9.x/adventurer/svg?seed={{ $post->user->name }}" alt="user-avatar">
+
+
+
+
+
+    <div class="w-full">
+
+
+
+
+
+        {{-- upper div --}}
+        <div class=" flex flex-row justify-between">
+
+
+
+
+
+            {{-- post info --}}
+            <div class="flex flex-row gap-1">
+                <a href={{ route('get-user', $post->user->id) }} class="hover:underline font-bold">{{ $post->user->name }}</a>
+                <p class="opacity-50 font-semibold hover:cursor-default"> · {{ $post->created_at->diffForHumans() }}
+                </p>
+            </div>
+
+
+
+
+
+            {{-- buttons --}}
+            <div class="text-sm flex flex-row items-start gap-2  underline ">
+                {{-- view --}}
+                <a href={{ route('post.get', $post->id) }} class="text-green-500">View</a>
+
+                @if (Auth::id() == $post->user->id)
+
+                    {{-- edit --}}
+                    @if ($isEdit ?? false)
+                        <a href={{ route('post.get', $post->id) }} class="text-yellow-500">Cancel Edit</a>
+                    @else
+                        <a href={{ route('post.edit', $post->id) }} class="text-yellow-500">Edit</a>
+                    @endif
+
+                    {{-- delete --}}
+                    <form action={{ route('post.delete', $post->id) }} method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="text-red-500  underline">Delete</button>
+                    </form>
+
+                @endif
+
+            </div>
         </div>
 
+
+
+
+
         {{-- content --}}
-        @if ($isEdit ?? false)
-            {{-- update form --}}
-            <form action={{ route('post.update', $post->id) }} method="POST"
-                class="flex flex-col p-5 gap-5  text-white  ">
-                @csrf
-                @method('PUT')
-                <div class="flex flex-row  gap-2 w-full">
-
-                    <textarea name="content" id="content" rows="4" type="text"
-                        class="bg-black border-[1px] border-white rounded-md px-2 text-base overflow-hidden w-full resize-none"
-                        placeholder="Edit your post">{{ $post->content }}</textarea>
-
-                </div>
-                @error('content')
-                    <span class="text-red-400">{{ $message }}</span>
-                @enderror
-                <div class="w-full flex flex-row justify-end">
-                    <button type="submit" class="bg-blue-500 px-5 py-2 rounded-3xl">Edit</button>
-                </div>
-
-            </form>
-        @else
-            {{-- content --}}
-            <p>
-                {{ $post->content }}
-            </p>
-        @endif
+        <p class="mt-1">{{ $post->content }} </p>
 
 
-        {{-- buttons --}}
-        <div class="flex flex-row justify-between p-1 ">
-            <button class="p-2 hover:opacity-50  rounded-full h-10 w-10">l</button>
-            <button class="p-2 hover:opacity-50 rounded-full h-10 w-10">c</button>
-            <button class="p-2 hover:opacity-50 rounded-full h-10 w-10">s</button>
+        {{-- reaction buttons --}}
+
+        <div class="underline flex flex-row justify-between mt-10">
+            <a href={{ route('post.get', $post->id) }} class="text-blue-500">Comment {{ count($post->comments) }}</a>
+            <a href="" class="text-red-500">Like 1</a>
+            <a href="" class="text-orange-500">Follow</a>
+            <a href="" class="text-gray-500">Dislike</a>
         </div>
     </div>
 
-    @if (auth()->id() == $post->user->id)
-        {{-- delete form --}}
-        <form action={{ route('post.delete', $post->id) }} method="POST">
-            @csrf
-            @method('DELETE')
-            <button class="self-start bg-red-500 p-2">x {{ $post->id }}</button>
-        </form>
-
-        {{-- edit buttons --}}
-        @if ($isEdit ?? false)
-            <a href={{ route('post.get', $post->id) }} class="bg-yellow-500">Cancel Edit</a>
-        @else
-            <a href={{ route('post.edit', $post->id) }} class="bg-yellow-500">Edit</a>
-        @endif
-    @endif
-
-    {{-- get post button --}}
-    <a href={{ route('post.get', $post->id) }} class="bg-yellow-500">View</a>
 
 
 
-    @include('components/comments-box')
 
 </div>
