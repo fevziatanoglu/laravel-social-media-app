@@ -1,4 +1,4 @@
-<form action={{ route('create-post') }} method="POST" 
+<form action={{ route('post.store') }} method="POST" 
     class="flex flex-col  px-10 py-3 text-white border-[1px] border-b-0 border-gray-600 gap-2 " >
     @csrf
     @method('post')

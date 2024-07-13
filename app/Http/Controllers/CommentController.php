@@ -18,6 +18,6 @@ class CommentController extends Controller
       
         $comment = Comment::create($validatedRequest);
 
-        return redirect()->route('get-post' , $post)->with('success', 'Post created successfully.');
+        return redirect()->route('post.get' , $post)->with('success', 'Post created successfully.');
     }
 }

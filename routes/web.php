@@ -21,12 +21,22 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('posts/{post}', [PostController::class, 'index'])->name('get-post');
-Route::post('posts', [PostController::class, 'store'])->name('create-post')->middleware('auth');
-Route::delete('posts/{post}', [PostController::class, 'delete'])->name('delete-post')->middleware('auth');;
-Route::get('posts/edit/{post}', [PostController::class, 'edit'])->name('edit-post')->middleware('auth');;
-Route::put('posts/update/{post}', [PostController::class, 'update'])->name('update-post')->middleware('auth');;
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+
+// prefix for url name   ->    post/{post}
+// as for name()              post.get
+// withoutMiddleware for if group have middleware , these are exception  ,  ['auth'] write this way !!
+Route::group(['prefix' => 'post/' , 'as' => 'post.' , 'middleware' => ['auth']] , function (){
+    Route::get('{post}', [PostController::class, 'index'])->name('get')->withoutMiddleware(['auth']);
+    Route::post('', [PostController::class, 'store'])->name('store');
+    Route::delete('{post}', [PostController::class, 'delete'])->name('delete');
+    Route::get('edit/{post}', [PostController::class, 'edit'])->name('edit');
+    Route::put('update/{post}', [PostController::class, 'update'])->name('update');
+
+});
+
+
 
 Route::post('posts/{post}/comments' , [CommentController::class , 'store'])->name('create-comment')->middleware('auth');
 

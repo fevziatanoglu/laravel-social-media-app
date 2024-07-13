@@ -16,7 +16,7 @@
         {{-- content --}}
         @if ($isEdit ?? false)
             {{-- update form --}}
-            <form action={{ route('update-post', $post->id) }} method="POST"
+            <form action={{ route('post.update', $post->id) }} method="POST"
                 class="flex flex-col p-5 gap-5  text-white  ">
                 @csrf
                 @method('PUT')
@@ -53,7 +53,7 @@
 
     @if (auth()->id() == $post->user->id)
         {{-- delete form --}}
-        <form action={{ route('delete-post', $post->id) }} method="POST">
+        <form action={{ route('post.delete', $post->id) }} method="POST">
             @csrf
             @method('DELETE')
             <button class="self-start bg-red-500 p-2">x {{ $post->id }}</button>
@@ -61,14 +61,14 @@
 
         {{-- edit buttons --}}
         @if ($isEdit ?? false)
-            <a href={{ route('get-post', $post->id) }} class="bg-yellow-500">Cancel Edit</a>
+            <a href={{ route('post.get', $post->id) }} class="bg-yellow-500">Cancel Edit</a>
         @else
-            <a href={{ route('edit-post', $post->id) }} class="bg-yellow-500">Edit</a>
+            <a href={{ route('post.edit', $post->id) }} class="bg-yellow-500">Edit</a>
         @endif
     @endif
 
     {{-- get post button --}}
-    <a href={{ route('get-post', $post->id) }} class="bg-yellow-500">View</a>
+    <a href={{ route('post.get', $post->id) }} class="bg-yellow-500">View</a>
 
 
 
