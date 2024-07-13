@@ -9,11 +9,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {   
 
-    function index(User $user){
 
-
-        return view('pages/profile' , ['user' => $user]);
-    }
 
     function register()
     {

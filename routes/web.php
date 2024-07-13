@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,7 +41,7 @@ Route::group(['prefix' => 'post/' , 'as' => 'post.' , 'middleware' => ['auth']] 
 
 Route::post('posts/{post}/comments' , [CommentController::class , 'store'])->name('create-comment')->middleware('auth');
 
-Route::get('users/{user}', [AuthController::class , 'index'])->name('get-user');
+Route::get('users/{user}', [UserController::class , 'index'])->name('get-user');
 
 Route::get('register' , [AuthController::class, 'register'])->name('register');
 Route::post('register' , [AuthController::class, 'store'])->name('create-user');

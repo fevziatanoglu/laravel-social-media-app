@@ -8,7 +8,7 @@
         <div class="flex flex-col">
             
     
-
+            @include('components.items.user-profile-item')
             <div>{{$user->name}}</div>
             
             @foreach ($user->posts as $post)
