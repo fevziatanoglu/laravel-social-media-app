@@ -10,6 +10,7 @@
 </head>
 
 <body class="bg-black container  text-white overflow-x-hidden">
+    @include('components.items.flash-message-item')
     <main class="  flex flex-row justify-center  m-0 w-screen  gap-4 px-24 ">
         {{-- left --}}
         <div class="w-1/5   py-3">

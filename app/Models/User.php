@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-     protected $guarded = [
+    protected $guarded = [
         'id',
         'created_at',
         'updated_at'
@@ -49,12 +49,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
-    public function posts(){
+
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
+    }
+
+    // there is no follower table , we need to define migration
+    // follower_id = follower user
+    // user_id   =   following user
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'user_follower', 'follower_id', 'user_id')->withTimestamps();
+    }
+
+
+    
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'user_follower', 'user_id', 'follower_id')->withTimestamps();
     }
 }
