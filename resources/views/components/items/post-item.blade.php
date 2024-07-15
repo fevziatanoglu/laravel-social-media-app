@@ -28,7 +28,8 @@
 
             {{-- post info --}}
             <div class="flex flex-row gap-1">
-                <a href={{ route('get-user', $post->user->id) }} class="hover:underline font-bold">{{ $post->user->name }}</a>
+                <a href={{ route('get-user', $post->user->id) }}
+                    class="hover:underline font-bold">{{ $post->user->name }}</a>
                 <p class="opacity-50 font-semibold hover:cursor-default"> · {{ $post->created_at->diffForHumans() }}
                 </p>
             </div>
@@ -74,10 +75,26 @@
         {{-- reaction buttons --}}
 
         <div class="underline flex flex-row justify-between mt-10">
-            <a href={{ route('post.get', $post->id) }} class="text-blue-500">Comment {{ count($post->comments) }}</a>
-            <a href="" class="text-red-500">Like 1</a>
+            <a href={{ route('post.get', $post->id) }} class="text-blue-500">Comment
+                {{ $post->comments()->count() }}</a>
+
+            @if (Auth::user()->isLiked($post))
+                <form action={{ route('unlike-post', $post->id) }} method='post'>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-500 underline ">Unlike {{ $post->likes()->count() }}</button>
+                </form>
+            @else
+                <form action={{ route('like-post', $post->id) }} method='post'>
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="text-red-500 underline ">Like {{ $post->likes()->count() }}</button>
+                </form>
+            @endif
+
+
             <a href="" class="text-orange-500">Follow</a>
-            <a href="" class="text-gray-500">Dislike</a>
+            {{-- <a href="" class="text-gray-500">Dislike</a> --}}
         </div>
     </div>
 

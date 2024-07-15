@@ -20,7 +20,7 @@ class FollowerController extends Controller
 
         $follower = auth()->user();
 
-        if($follower->isFollow($user)){
+        if($follower->isFollowed($user)){
             $follower->followings()->detach($user);
         }
 

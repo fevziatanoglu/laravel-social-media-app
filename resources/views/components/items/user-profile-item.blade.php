@@ -23,7 +23,7 @@
                     @if (Auth::id() == $user->id)
                         <button class="text-blue-500 underline ">Edit</button>
                     @else
-                        @if (Auth::user()->isFollow($user))
+                        @if (Auth::user()->isFollowed($user))
                         <form action={{ route('unfollow-user', $user->id) }} method='POST'>
                             @csrf
                             @method('delete')
