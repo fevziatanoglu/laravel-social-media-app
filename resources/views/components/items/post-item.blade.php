@@ -77,8 +77,8 @@
         <div class="underline flex flex-row justify-between mt-10">
             <a href={{ route('post.get', $post->id) }} class="text-blue-500">Comment
                 {{ $post->comments()->count() }}</a>
-
-            @if (Auth::user()->isLiked($post))
+                @auth()
+                @if (Auth::user()->isLiked($post))
                 <form action={{ route('unlike-post', $post->id) }} method='post'>
                     @csrf
                     @method('DELETE')
@@ -91,6 +91,8 @@
                     <button type="submit" class="text-red-500 underline ">Like {{ $post->likes()->count() }}</button>
                 </form>
             @endif
+                @endauth
+           
 
 
             <a href="" class="text-orange-500">Follow</a>
