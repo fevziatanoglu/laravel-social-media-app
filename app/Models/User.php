@@ -70,9 +70,14 @@ class User extends Authenticatable
     }
 
 
-    
+
     public function followers()
     {
         return $this->belongsToMany(User::class, 'user_follower', 'user_id', 'follower_id')->withTimestamps();
+    }
+
+
+    public function isFollow(User $user){
+        return $this->followings()->where('user_id', $user->id)->exists();
     }
 }

@@ -23,12 +23,21 @@
                     @if (Auth::id() == $user->id)
                         <button class="text-blue-500 underline ">Edit</button>
                     @else
+                        @if (Auth::user()->isFollow($user))
+                        <form action={{ route('unfollow-user', $user->id) }} method='POST'>
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="text-blue-500 underline ">Unfollow</button>
+
+                        </form>
+                        @else
                         <form action={{ route('follow-user', $user->id) }} method='POST'>
                             @csrf
                             @method('post')
                             <button type="submit" class="text-blue-500 underline ">Follow</button>
 
                         </form>
+                        @endif
                     @endif
                 @endauth
             </div>
@@ -39,7 +48,7 @@
                 Posts: {{ count($user->comments) }}
             </div>
             <div>
-                Followers: 0
+                Followers: {{ count($user->followers) }}
 
             </div>
         </div>

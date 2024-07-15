@@ -16,7 +16,15 @@ class FollowerController extends Controller
     }
 
     
-    public function followun(){
+    public function unfollow(User $user){
+
+        $follower = auth()->user();
+
+        if($follower->isFollow($user)){
+            $follower->followings()->detach($user);
+        }
+
+        return redirect()->back()->with('success', 'You are not following '. $user->name . ' anymore.');  
         
     }
 }
